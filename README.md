@@ -1,7 +1,7 @@
 
 # GitRelease - DevOps Automation Command Line Tool
 
-[![CI](https://github.com/waldirborbajr/gitrelease/actions/workflows/ci.yaml/badge.svg)](https://github.com/waldirborbajr/gitrelease/actions/workflows/ci.yaml) | [![Release](https://github.com/waldirborbajr/gitrelease/actions/workflows/release.yaml/badge.svg)](https://github.com/waldirborbajr/gitrelease/actions/workflows/release.yaml)
+[![CI](https://github.com/waldirborbajr/gitrelease/actions/workflows/ci.yaml/badge.svg)](https://github.com/waldirborbajr/gitrelease/actions/workflows/ci.yaml) [![Release](https://github.com/waldirborbajr/gitrelease/actions/workflows/release.yaml/badge.svg)](https://github.com/waldirborbajr/gitrelease/actions/workflows/release.yaml) [![Security audit](https://github.com/waldirborbajr/gitrelease/actions/workflows/audit.yaml/badge.svg)](https://github.com/waldirborbajr/gitrelease/actions/workflows/audit.yaml)
 
 ## Overview
 
