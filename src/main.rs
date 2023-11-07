@@ -42,8 +42,8 @@ impl Version {
 
     fn increment_major(&mut self) {
         self.major += 1;
-        self.minor = 0;
-        self.release = 0;
+        // self.minor = 0;
+        // self.release = 0;
     }
 
     fn format(&self) -> String {
