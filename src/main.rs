@@ -1,10 +1,7 @@
 use std::process::exit;
 
-use gitrelease::get_current_git_tag;
-use gitrelease::new_tag;
-use gitrelease::push_new_tag;
-use gitrelease::show_version;
-use gitrelease::Version;
+mod gitlib;
+use gitlib::*;
 
 // git describe --tags
 // git describe --exact-match --tags $(git log -n1 --pretty='%h')
