@@ -95,11 +95,15 @@ fn main() {
 
     let git_tag = get_current_git_tag();
 
+    println!("Current tag: {:?}", git_tag);
+
     match git_tag {
         Ok(tag) => {
             let tag_parts: Vec<&str> = tag.trim().split('v').collect();
+            println!("Tag parts: {:?}", tag_parts);
+            println!("Tag parts len: {}", tag_parts.len());
             if tag_parts.len() == 2 {
-                let version_parts: Vec<&str> = tag_parts[0].split('.').collect();
+                let version_parts: Vec<&str> = tag_parts[1].split('.').collect();
                 if version_parts.len() == 3 {
                     let major = version_parts[0].parse().unwrap();
                     let minor = version_parts[1].parse().unwrap();
