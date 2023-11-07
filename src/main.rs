@@ -1,22 +1,78 @@
 use std::process::Command;
 use std::str;
 
+struct Version {
+    major: u32,
+    minor: u32,
+    release: u32,
+}
+
+impl Version {
+    fn new(major: u32, minor: u32, release: u32) -> Self {
+        Self {
+            major,
+            minor,
+            release,
+        }
+    }
+
+    fn increment_release(&self) -> Self {
+        if self.release == 99 {
+            Self {
+                major: 0,
+                minor: self.increment_minor().minor,
+                release: 0,
+            }
+        } else {
+            Self {
+                major: self.major,
+                minor: self.minor,
+                release: self.release + 1,
+            }
+        }
+    }
+
+    fn increment_minor(&self) -> Self {
+        if self.minor == 99 {
+            Self {
+                major: self.increment_major().major,
+                minor: 0,
+                release: 0,
+            }
+        } else {
+            Self {
+                major: self.major,
+                minor: self.minor + 1,
+                release: 0,
+            }
+        }
+    }
+
+    fn increment_major(&self) -> Self {
+        Self {
+            major: self.major + 1,
+            minor: 0,
+            release: 0,
+        }
+    }
+
+    fn format(&self) -> String {
+        format!("{}.{}.{}", self.major, self.minor, self.release)
+    }
+}
+
 fn get_current_git_tag() -> Result<String, String> {
-    let current_release = Command::new("git")
+    let output = Command::new("git")
         .arg("describe")
         .arg("--tags")
         .output()
         .expect("Failed to execute command");
 
-    if current_release.status.success() {
-        let stdout = str::from_utf8(&current_release.stdout).expect("Failed to convert to string");
-        let tag = stdout.trim().to_string();
-        Ok(tag)
+    if output.status.success() {
+        let git_describe = str::from_utf8(&output.stdout).expect("Failed to convert to string");
+        Ok(git_describe.trim().to_string())
     } else {
-        let stderr =
-            str::from_utf8(&current_release.stderr).expect("Failed to convert stderr to string");
-        let error_message = stderr.trim().to_string();
-        Err(error_message)
+        Err("Git describe command failed".to_string())
     }
 }
 
@@ -37,21 +93,27 @@ fn show_version() -> String {
 fn main() {
     println!("{}", show_version());
 
-    match get_current_git_tag() {
+    let git_tag = get_current_git_tag();
+
+    match git_tag {
         Ok(tag) => {
-            println!("Current Git tag: {}", tag);
-            // Assuming the tag has a format like "v1.0.0", we can parse and increment the release number:
-            let parts: Vec<&str> = tag.split('.').collect();
-            if parts.len() == 3 {
-                let major: i32 = parts[0].trim_start_matches('v').parse().unwrap();
-                let minor: i32 = parts[1].parse().unwrap();
-                let release: i32 = parts[2].parse().unwrap();
-                // Increment the release number by 1
-                let new_release = release + 1;
-                let new_tag = format!("v{}.{}.{}", major, minor, new_release);
-                println!("New Git tag: {}", new_tag);
+            let tag_parts: Vec<&str> = tag.trim().split('-').collect();
+            if tag_parts.len() == 2 {
+                let version_parts: Vec<&str> = tag_parts[0].split('.').collect();
+                if version_parts.len() == 3 {
+                    let major = version_parts[0].parse().unwrap();
+                    let minor = version_parts[1].parse().unwrap();
+                    let release = version_parts[2].parse().unwrap();
+                    let version = Version::new(major, minor, release);
+
+                    version.increment_release();
+
+                    println!("New version: {}", version.format());
+                } else {
+                    println!("Invalid tag format.");
+                }
             } else {
-                println!("Tag format is not as expected.");
+                println!("Invalid tag format.");
             }
         }
         Err(error) => {
