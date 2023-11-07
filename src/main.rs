@@ -119,15 +119,11 @@ fn main() {
 
     let git_tag = get_current_git_tag();
 
-    println!("Current tag: {:?}", git_tag);
+    println!("\nCurrent version: {:?}", git_tag);
 
     match git_tag {
         Ok(tag) => {
             let tag_parts: Vec<&str> = tag.trim().split('v').collect();
-            println!("------------------------------------------------");
-            println!("Tag parts: {:?}", tag_parts);
-            println!("Tag parts len: {}", tag_parts.len());
-            println!("------------------------------------------------");
             if tag_parts.len() == 2 {
                 let version_parts: Vec<&str> = tag_parts[1].split('.').collect();
                 if version_parts.len() == 3 {
@@ -143,14 +139,13 @@ fn main() {
                     // Commit new tag
                     let new_tag = new_tag(&version.format());
                     match new_tag {
-                        Ok(new_tag) => {
-                            println!("New tag: {}", new_tag);
-
+                        Ok(_) => {
                             // Push new tag
                             let push_new_tag = push_new_tag();
                             match push_new_tag {
-                                Ok(push_new_tag) => {
-                                    println!("Push new tag: {}", push_new_tag);
+                                Ok(_) => {
+                                    println!("Committed and Pushed new version.");
+                                    exit(0);
                                 }
                                 Err(error) => {
                                     eprintln!("Error: {}", error);
