@@ -22,7 +22,7 @@ impl Version {
             self.increment_minor();
             self.release = 0;
         } else {
-            self.major = 0;
+            // self.major = 0;
             // self.minor = 0;
             self.release += 1;
         }
@@ -57,6 +57,11 @@ pub fn get_current_git_tag() -> Result<String, String> {
         .arg("--abbrev=0")
         .output()
         .expect("Failed to execute command");
+
+    let git_describe = str::from_utf8(&output.stderr).expect("Failed to convert to string");
+    if git_describe.trim() == "fatal: No names found, cannot describe anything." {
+        return Ok("v0.1.0".to_string());
+    }
 
     if output.status.success() {
         let git_describe = str::from_utf8(&output.stdout).expect("Failed to convert to string");
@@ -98,10 +103,4 @@ pub fn push_new_tag() -> Result<String, String> {
     } else {
         Err("Git describe command failed".to_string())
     }
-}
-
-pub fn show_version() -> String {
-    const NAME: &str = env!("CARGO_PKG_NAME");
-    const VERSION: &str = env!("CARGO_PKG_VERSION");
-    format!("{} via 🦀 v{}/2023", NAME, VERSION)
 }

@@ -1,7 +1,10 @@
 use std::process::exit;
 
-mod gitlib;
-use gitlib::*;
+mod git;
+use git::*;
+
+mod version;
+use version::*;
 
 // git describe --tags
 // git describe --exact-match --tags $(git log -n1 --pretty='%h')
