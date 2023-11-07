@@ -57,7 +57,7 @@ impl Version {
     }
 
     fn format(&self) -> String {
-        format!("{}.{}.{}", self.major, self.minor, self.release)
+        format!("v{}.{}.{}", self.major, self.minor, self.release)
     }
 }
 
@@ -97,7 +97,7 @@ fn main() {
 
     match git_tag {
         Ok(tag) => {
-            let tag_parts: Vec<&str> = tag.trim().split('-').collect();
+            let tag_parts: Vec<&str> = tag.trim().split('v').collect();
             if tag_parts.len() == 2 {
                 let version_parts: Vec<&str> = tag_parts[0].split('.').collect();
                 if version_parts.len() == 3 {
