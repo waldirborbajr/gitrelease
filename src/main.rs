@@ -1,4 +1,4 @@
-use std::process::Command;
+use std::process::{exit, Command};
 use std::str;
 
 struct Version {
@@ -65,6 +65,40 @@ fn get_current_git_tag() -> Result<String, String> {
     }
 }
 
+fn new_tag(new_tag: &str) -> Result<String, String> {
+    let output = Command::new("git")
+        .arg("tag")
+        .arg("-a")
+        .arg(new_tag)
+        .arg("-m")
+        .arg("new release")
+        .arg("main")
+        .output()
+        .expect("Failed to execute command");
+
+    if output.status.success() {
+        let git_describe = str::from_utf8(&output.stdout).expect("Failed to convert to string");
+        Ok(git_describe.trim().to_string())
+    } else {
+        Err("Git describe command failed".to_string())
+    }
+}
+
+fn push_new_tag() -> Result<String, String> {
+    let output = Command::new("git")
+        .arg("push")
+        .arg("--tags")
+        .output()
+        .expect("Failed to execute command");
+
+    if output.status.success() {
+        let git_describe = str::from_utf8(&output.stdout).expect("Failed to convert to string");
+        Ok(git_describe.trim().to_string())
+    } else {
+        Err("Git describe command failed".to_string())
+    }
+}
+
 fn show_version() -> String {
     const NAME: &str = env!("CARGO_PKG_NAME");
     const VERSION: &str = env!("CARGO_PKG_VERSION");
@@ -104,15 +138,42 @@ fn main() {
                     version.increment_release();
 
                     println!("New version: {}", version.format());
+
+                    // Commit new tag
+                    let new_tag = new_tag(&version.format());
+                    match new_tag {
+                        Ok(new_tag) => {
+                            println!("New tag: {}", new_tag);
+
+                            // Push new tag
+                            let push_new_tag = push_new_tag();
+                            match push_new_tag {
+                                Ok(push_new_tag) => {
+                                    println!("Push new tag: {}", push_new_tag);
+                                }
+                                Err(error) => {
+                                    eprintln!("Error: {}", error);
+                                    exit(1);
+                                }
+                            }
+                        }
+                        Err(error) => {
+                            eprintln!("Error: {}", error);
+                            exit(1);
+                            // You can handle the error here, such as exiting the program or taking other actions.
+                        }
+                    }
                 } else {
                     println!("Invalid tag format.");
                 }
             } else {
-                println!("Invalid tag format.");
+                eprintln!("Invalid tag format.");
+                exit(1);
             }
         }
         Err(error) => {
-            println!("Error: {}", error);
+            eprintln!("Error: {}", error);
+            exit(1);
             // You can handle the error here, such as exiting the program or taking other actions.
         }
     }
