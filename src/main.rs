@@ -8,52 +8,42 @@ struct Version {
 }
 
 impl Version {
-    fn new(major: u32, minor: u32, release: u32) -> Self {
-        Self {
+    fn new(major: u32, minor: u32, release: u32) -> Version {
+        Version {
             major,
             minor,
             release,
         }
     }
 
-    fn increment_release(&self) -> Self {
+    fn increment_release(&mut self) {
         if self.release == 99 {
-            Self {
-                major: 0,
-                minor: self.increment_minor().minor,
-                release: 0,
-            }
+            self.major = 0;
+            self.increment_minor();
+            self.release = 0;
         } else {
-            Self {
-                major: self.major,
-                minor: self.minor,
-                release: self.release + 1,
-            }
+            self.major = self.major;
+            self.minor = self.minor;
+            self.release = self.release + 1;
         }
     }
 
-    fn increment_minor(&self) -> Self {
+    fn increment_minor(&mut self) {
         if self.minor == 99 {
-            Self {
-                major: self.increment_major().major,
-                minor: 0,
-                release: 0,
-            }
+            self.increment_major();
+            self.minor = 0;
+            self.release = 0;
         } else {
-            Self {
-                major: self.major,
-                minor: self.minor + 1,
-                release: 0,
-            }
+            self.major = self.major;
+            self.minor = self.minor + 1;
+            self.release = 0;
         }
     }
 
-    fn increment_major(&self) -> Self {
-        Self {
-            major: self.major + 1,
-            minor: 0,
-            release: 0,
-        }
+    fn increment_major(&mut self) {
+        self.major = self.major + 1;
+        self.minor = 0;
+        self.release = 0;
     }
 
     fn format(&self) -> String {
@@ -63,8 +53,7 @@ impl Version {
 
 fn get_current_git_tag() -> Result<String, String> {
     let output = Command::new("git")
-        .arg("describe")
-        .arg("--tags")
+        .arg("tag")
         .output()
         .expect("Failed to execute command");
 
@@ -100,15 +89,17 @@ fn main() {
     match git_tag {
         Ok(tag) => {
             let tag_parts: Vec<&str> = tag.trim().split('v').collect();
+            println!("------------------------------------------------");
             println!("Tag parts: {:?}", tag_parts);
             println!("Tag parts len: {}", tag_parts.len());
+            println!("------------------------------------------------");
             if tag_parts.len() == 2 {
                 let version_parts: Vec<&str> = tag_parts[1].split('.').collect();
                 if version_parts.len() == 3 {
                     let major = version_parts[0].parse().unwrap();
                     let minor = version_parts[1].parse().unwrap();
                     let release = version_parts[2].parse().unwrap();
-                    let version = Version::new(major, minor, release);
+                    let mut version = Version::new(major, minor, release);
 
                     version.increment_release();
 
