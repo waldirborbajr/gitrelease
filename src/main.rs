@@ -23,7 +23,7 @@ impl Version {
             self.release = 0;
         } else {
             self.major = 0;
-            self.minor = 0;
+            // self.minor = 0;
             self.release += 1;
         }
     }
@@ -34,9 +34,9 @@ impl Version {
             self.minor = 0;
             self.release = 0;
         } else {
-            self.major = 0;
+            // self.major = 0;
             self.minor += 1;
-            self.release = 0;
+            // self.release = 0;
         }
     }
 
