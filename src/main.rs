@@ -22,9 +22,9 @@ impl Version {
             self.increment_minor();
             self.release = 0;
         } else {
-            self.major = self.major;
-            self.minor = self.minor;
-            self.release = self.release + 1;
+            self.major = 0;
+            self.minor = 0;
+            self.release += 1;
         }
     }
 
@@ -34,14 +34,14 @@ impl Version {
             self.minor = 0;
             self.release = 0;
         } else {
-            self.major = self.major;
-            self.minor = self.minor + 1;
+            self.major = 0;
+            self.minor += 1;
             self.release = 0;
         }
     }
 
     fn increment_major(&mut self) {
-        self.major = self.major + 1;
+        self.major += 1;
         self.minor = 0;
         self.release = 0;
     }
