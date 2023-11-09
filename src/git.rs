@@ -55,6 +55,7 @@ pub fn get_current_git_tag() -> Result<String, String> {
     let output = Command::new("git")
         .arg("describe")
         .arg("--abbrev=0")
+        .arg("--tags")
         .output()
         .expect("Failed to execute command");
 
