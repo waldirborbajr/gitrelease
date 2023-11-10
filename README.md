@@ -1,7 +1,9 @@
 
 # GitRelease - DevOps Automation Command Line Tool
 
-[![Lint](https://github.com/waldirborbajr/gitrelease/actions/workflows/linter.yaml/badge.svg)](https://github.com/waldirborbajr/gitrelease/actions/workflows/linter.yaml) [![CI](https://github.com/waldirborbajr/gitrelease/actions/workflows/ci.yaml/badge.svg)](https://github.com/waldirborbajr/gitrelease/actions/workflows/ci.yaml) [![Release](https://github.com/waldirborbajr/gitrelease/actions/workflows/release.yaml/badge.svg)](https://github.com/waldirborbajr/gitrelease/actions/workflows/release.yaml) [![Security audit](https://github.com/waldirborbajr/gitrelease/actions/workflows/audit.yaml/badge.svg)](https://github.com/waldirborbajr/gitrelease/actions/workflows/audit.yaml)
+[![Lint](https://github.com/waldirborbajr/gitrelease/actions/workflows/linter.yaml/badge.svg)](https://github.com/waldirborbajr/gitrelease/actions/workflows/linter.yaml) [![CI](https://github.com/waldirborbajr/gitrelease/actions/workflows/ci.yaml/badge.svg)](https://github.com/waldirborbajr/gitrelease/actions/workflows/ci.yaml) 
+[![Release](https://github.com/waldirborbajr/gitrelease/actions/workflows/release.yaml/badge.svg)](https://github.com/waldirborbajr/gitrelease/actions/workflows/release.yaml) 
+[![Security audit](https://github.com/waldirborbajr/gitrelease/actions/workflows/audit.yaml/badge.svg)](https://github.com/waldirborbajr/gitrelease/actions/workflows/audit.yaml)
 
 ## Overview
 
