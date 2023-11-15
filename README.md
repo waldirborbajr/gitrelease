@@ -11,7 +11,7 @@ A simple command line tool written in Rust. It automates the process of adding a
 
 ## Usage
 
-To use gitrelease, follow these steps:
+To use GitRelease, follow these steps:
 
 1. Navigate to the root directory of your Git repository in the terminal.
 
@@ -70,6 +70,12 @@ cargo install --path .
 - `names`: This dependency is used to generate random commit messages. You can find more information about this crate [here](https://crates.io/crates/names).
 
 - `std::os`: This module is part of the Rust standard library and is used for interacting with the operating system. It is used in this project for handling process exit codes.
+
+## Contributing to GitRelease
+
+If you are interested in contributing to GitRelease, we would love to have your help! You can start by checking out the [ open issues ](https://github.com/waldirborbajr/gitrelease/issues) on our GitHub repository to see if there is anything you can help with. You can also suggest new features or improvements by opening a new issue.
+
+To contribute code to GitRelease, you will need to fork the repository and create a new branch for your changes. Once you have made your changes, you can submit a pull request for them to be reviewed and merged into the main codebase.
 
 ## License
 
