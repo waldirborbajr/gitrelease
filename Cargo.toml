@@ -3,6 +3,11 @@ name = "gitrelease"
 version = "0.1.2"
 edition = "2021"
 authors = ["Waldir Borba Junior <wborbajr@gmail.com>"]
+description = "GitRelease in rust!"
+repository = "https://github.com/waldirborbajr/gitrelease"
+readme  = "README.md"
+keywords = ["gitrelease", "devops", "git"]
+license = "MIT"
 
 # See more keys and their definitions at https://doc.rust-lang.org/cargo/reference/manifest.html
 
@@ -14,3 +19,4 @@ codegen-units = 1
 panic = "abort"
 strip = true
 opt-level = 'z' # Optimize for size
+debug = false
