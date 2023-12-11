@@ -7,7 +7,7 @@ description = "GitRelease in rust!"
 repository = "https://github.com/waldirborbajr/gitrelease"
 homepage = "https://github.com/waldirborbajr/gitrelease"
 readme  = "README.md"
-keywords = ["gitrelease", "devops", "git"]
+keywords = ["gitrelease", "devops", "git", "cli", "terminal"]
 license = "MIT"
 
 [[bin]]
