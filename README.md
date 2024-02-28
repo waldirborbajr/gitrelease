@@ -1,15 +1,14 @@
 
 # GitRelease - DevOps Automation Command Line Tool
 
+<p align="center">
+  <img width="256" height="256" src="./.assets/gitrelease-logo.png" />
+</p>
+
 [![Lint](https://github.com/waldirborbajr/gitrelease/actions/workflows/linter.yaml/badge.svg)](https://github.com/waldirborbajr/gitrelease/actions/workflows/linter.yaml) [![CI](https://github.com/waldirborbajr/gitrelease/actions/workflows/ci.yaml/badge.svg)](https://github.com/waldirborbajr/gitrelease/actions/workflows/ci.yaml)
 [![Release](https://github.com/waldirborbajr/gitrelease/actions/workflows/release.yaml/badge.svg)](https://github.com/waldirborbajr/gitrelease/actions/workflows/release.yaml)
 [![Security audit](https://github.com/waldirborbajr/gitrelease/actions/workflows/audit.yaml/badge.svg)](https://github.com/waldirborbajr/gitrelease/actions/workflows/audit.yaml)
 [![Release to crates.io](https://github.com/waldirborbajr/gitrelease/actions/workflows/crates.yaml/badge.svg)](https://github.com/waldirborbajr/gitrelease/actions/workflows/crates.yaml)
-
-<p>
-  <img src="./.assets/gitrelease-logo.png" width="120", height="120"/>
-  <br>
-</p>
 
 ## Overview
 
